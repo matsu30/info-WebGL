@@ -1,104 +1,128 @@
 window.addEventListener('load', init);
 
 function init() {
+
   // サイズを指定
-  const width = 960;
-  const height = 540;
+  const width = window.innerWidth;
+  const height = window.innerWidth;
 
   // レンダラーを作成
   const renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector('#myCanvas'),
     antialias: true
   });
-  renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize(width, height);
-  renderer.localClippingEnabled = true;
   renderer.setClearColor(0xFFFFE5);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.localClippingEnabled = true;
 
   // シーンを作成
   const scene = new THREE.Scene();
+
+  //　光源を作成
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+  const directionalLight = new THREE.DirectionalLight(0xdfebff, 1.0);
+  directionalLight.position.set(400, 200, 300);
+  scene.add(ambientLight);
+  scene.add(directionalLight);
+
   // カメラを作成
   const camera = new THREE.PerspectiveCamera(45, width / height);
+  
+
   // カメラの初期座標を設定
   camera.position.set(0, 0, 1000);
+
   // カメラコントローラーを作成
-  const controls = new THREE.OrbitControls( camera, renderer.domElement);
-  controls.addEventListener( 'change', render ); 
-  controls.minDistance = 1;
-  controls.maxDistance = 10;
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.addEventListener('change', render);
+  controls.minDistance = 800;
+  controls.maxDistance = 1500;
   controls.enablePan = false;
+
+
+
+  //======================================
+  //オブジェクトの作成
+  //======================================
 
   var group1 = new THREE.Group();
   var group2 = new THREE.Group();
   var group3 = new THREE.Group();
-
-  var clipPlanes = [ new THREE.Plane( new THREE.Vector3( 1, 0, 0 ), 0 ) ]
-
-  var material = new THREE.MeshNormalMaterial( {
-    clippingPlane: clipPlanes
-  } );
   
-  scene.add( group1 );
+  const clipPlanes = [ new THREE.Plane(new THREE.Vector3(1, 0, 0), 0) ];
+
+  const Geome1 = new THREE.BoxGeometry(300, 300, 300);
+  const Geome2 = new THREE.BoxGeometry(200, 500, 200);
+  const Geome3 = new THREE.TorusGeometry(200, 80, 64, 80);
+
+  const sphere1 = new THREE.MeshLambertMaterial( {
+    color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
+    side: THREE.DoubleSide,
+    clippingPlanes: clipPlanes,
+    clipIntersection: true
+  });
+
+  const sphere2 = new THREE.MeshLambertMaterial( {
+    color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
+    side: THREE.DoubleSide,
+    clippingPlanes: clipPlanes,
+    clipIntersection: true
+  });
+
+  const sphere3 = new THREE.MeshLambertMaterial( {
+    color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
+    side: THREE.DoubleSide,
+    clippingPlanes: clipPlanes,
+    clipIntersection: true
+  });
+
+  const mesh1 = new THREE.Mesh(Geome1, sphere1);
+  const mesh2 = new THREE.Mesh(Geome2, sphere2);
+  const mesh3 = new THREE.Mesh(Geome3, sphere3);
+  
+
+  const clipHelpers = new THREE.PlaneHelper(clipPlanes[0], 600, 0xff0000);
+  scene.add(clipHelpers);
+  scene.add( mesh1 );
+
+
+
+  //======================================
+  //オブジェクトの切り替え
+  //======================================
 
   document.getElementById("seihou-btn").onclick = function() {
-    scene.remove(group2);
-    scene.remove(group3);
-    scene.add(group1);
+    scene.remove(mesh2);
+    scene.remove(mesh3);
+    scene.add(mesh1);
   };
 
   document.getElementById("tyouhou-btn").onclick = function() {
-    scene.remove(group1);
-    scene.remove(group3);
-    scene.add(group2);
+    scene.remove(mesh1);
+    scene.remove(mesh3);
+    scene.add(mesh2);
   };
 
   document.getElementById("maru-btn").onclick = function() {
-    scene.remove(group1);
-    scene.remove(group2);
-    scene.add(group3);
+    scene.remove(mesh1);
+    scene.remove(mesh2);
+    scene.add(mesh3);
   };
 
 
-  for ( var i = 1; i <= 30; i += 2 ) {
 
-    group1.add( new THREE.Mesh(
-      new THREE.BoxGeometry(30, 30, 30),
-      material )
-    );
-
-  }
-
-  for ( var i = 1; i <= 30; i += 2 ) {
-
-    group2.add( new THREE.Mesh(
-      new THREE.BoxGeometry(20, 50, 20),
-      material )
-    );
-
-  }
-
-  for ( var i = 1; i <= 30; i += 2 ) {
-
-    group3.add( new THREE.Mesh(
-      new THREE.TorusGeometry(20, 8, 6, 80),
-      material )
-    );
-
-  }
-
-
-  var helpers = new THREE.Group();
-  helpers.add( new THREE.PlaneHelper( clipPlanes[ 0 ], 2, 0xff0000 ) );
-  scene.add( helpers );
-  
-
-
+  //======================================
+  //dat.GUI
+  //======================================
+ 
   var gui = new dat.GUI();
 
   var params = {
     planeConstant: 0,
     showHelpers: false
   };
+
 
   gui.add( params, 'planeConstant', - 1, 1 ).step( 0.01 ).name( 'plane constant' ).onChange( function ( value ) {
 
@@ -114,25 +138,35 @@ function init() {
 
   gui.add( params, 'showHelpers' ).name( 'show helpers' ).onChange( function ( value ) {
 
-    helpers.visible = value;
+    clipHelpers.visible = value;
 
     render();
 
   } );
 
+  //======================================
+  //リサイズ云々
+  //======================================
 
-  function render() {
-
-    renderer.render( scene, camera );
-
-  }
-
+  window.addEventListener('resize', onWindowResize, false);
+  render();
   tick();
 
-  // 毎フレーム時に実行されるループイベントです
+  function onWindowResize() {
+    renderer.setSize(window.innerWidth, 540);
+    render();
+  }
+
+  function render() {
+    requestAnimationFrame(render);
+    renderer.render(scene, camera);
+  }
+
   function tick() {
-    // レンダリング
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
   }
+
+
+  
 }
