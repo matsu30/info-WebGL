@@ -77,14 +77,13 @@ function init() {
     clipIntersection: true
   });
 
-  const mesh1 = new THREE.Mesh(Geome1, sphere1);
-  const mesh2 = new THREE.Mesh(Geome2, sphere2);
-  const mesh3 = new THREE.Mesh(Geome3, sphere3);
+  group1.add( new THREE.Mesh(Geome1, sphere1) );
+  group2.add( new THREE.Mesh(Geome2, sphere2) );
+  group3.add( new THREE.Mesh(Geome3, sphere3) );
   
-
   const clipHelpers = new THREE.PlaneHelper(clipPlanes[0], 600, 0xff0000);
   scene.add(clipHelpers);
-  scene.add( mesh1 );
+  scene.add( group1 );
 
 
 
@@ -93,21 +92,21 @@ function init() {
   //======================================
 
   document.getElementById("seihou-btn").onclick = function() {
-    scene.remove(mesh2);
-    scene.remove(mesh3);
-    scene.add(mesh1);
+    scene.remove(group2);
+    scene.remove(group3);
+    scene.add(group1);
   };
 
   document.getElementById("tyouhou-btn").onclick = function() {
-    scene.remove(mesh1);
-    scene.remove(mesh3);
-    scene.add(mesh2);
+    scene.remove(group1);
+    scene.remove(group3);
+    scene.add(group2);
   };
 
   document.getElementById("maru-btn").onclick = function() {
-    scene.remove(mesh1);
-    scene.remove(mesh2);
-    scene.add(mesh3);
+    scene.remove(group1);
+    scene.remove(group2);
+    scene.add(group3);
   };
 
 
@@ -124,7 +123,7 @@ function init() {
   };
 
 
-  gui.add( params, 'planeConstant', - 1, 1 ).step( 0.01 ).name( 'plane constant' ).onChange( function ( value ) {
+  gui.add( params, 'planeConstant', - 300, 300 ).step( 1 ).name( 'plane constant' ).onChange( function ( value ) {
 
     for ( var j = 0; j < clipPlanes.length; j ++ ) {
 
