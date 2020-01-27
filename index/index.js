@@ -3,8 +3,8 @@ window.addEventListener('load', init);
 function init() {
 
   // サイズを指定
-  const width = window.innerWidth;
-  const height = window.innerWidth;
+  const width = 860;
+  const height = 540;
 
   // レンダラーを作成
   const renderer = new THREE.WebGLRenderer({
@@ -147,14 +147,21 @@ function init() {
   //リサイズ云々
   //======================================
 
-  window.addEventListener('resize', onWindowResize, false);
-  render();
-  tick();
-
-  function onWindowResize() {
-    renderer.setSize(window.innerWidth, 540);
-    render();
-  }
+	// 初期化のために実行
+	onResize();
+	// リサイズイベント発生時に実行
+	window.addEventListener('resize', onResize);
+	function onResize() {
+		// サイズを取得
+		const width = window.innerWidth;
+		const height = window.innerHeight;
+		// レンダラーのサイズを調整する
+		renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setSize(width/1.2, height/1.2);
+		// カメラのアスペクト比を正す
+		camera.aspect = width / height;
+		camera.updateProjectionMatrix();
+	}
 
   function render() {
     requestAnimationFrame(render);
@@ -166,6 +173,7 @@ function init() {
     requestAnimationFrame(tick);
   }
 
-
+  render();
+  tick();
   
 }
