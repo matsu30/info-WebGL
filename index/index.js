@@ -51,19 +51,10 @@ function init() {
   var group1 = new THREE.Group();
   var group2 = new THREE.Group();
   var group3 = new THREE.Group();
+  var group4 = new THREE.Group();
 
+  //肺
   const loader = new THREE.GLTFLoader();
-  loader.load('./model/stomach/stomach.gltf', function(data){
-    const stomach = data.scene;
-    stomach.material = new THREE.MeshLambertMaterial({
-      side: THREE.DoubleSide,
-      clippingPlanes: clipPlanes,
-      clipIntersection: true
-    });
-    group1.add(stomach);
-  }); 
-
-  //const loader = new THREE.GLTFLoader();
   loader.load('./model/lung/lung.gltf', function(data){
     const lung = data.scene;
     lung.material = new THREE.MeshLambertMaterial({
@@ -71,10 +62,21 @@ function init() {
       clippingPlanes: clipPlanes,
       clipIntersection: true
     });
-    group2.add(lung);
+    group1.add(lung);
+  }); 
+
+  //胃
+  loader.load('./model/stomach/stomach.gltf', function(data){
+    const stomach = data.scene;
+    stomach.material = new THREE.MeshLambertMaterial({
+      side: THREE.DoubleSide,
+      clippingPlanes: clipPlanes,
+      clipIntersection: true
+    });
+    group2.add(stomach);
   });
 
-  //const loader = new THREE.GLTFLoader();
+  //腸
   loader.load('./model/intestine/intestine.gltf', function(data){
     const intestine = data.scene;
     intestine.material = new THREE.MeshLambertMaterial({
@@ -83,6 +85,17 @@ function init() {
       clipIntersection: true
     });
     group3.add(intestine);
+  });
+
+  //肝臓
+  loader.load('./model/liver/liver.gltf', function(data){
+    const liver = data.scene;
+    liver.material = new THREE.MeshLambertMaterial({
+      side: THREE.DoubleSide,
+      clippingPlanes: clipPlanes,
+      clipIntersection: true
+    });
+    group4.add(liver);
   });
 
   //const Geome1 = new THREE.BoxGeometry(300, 300, 300);
@@ -127,22 +140,30 @@ function init() {
   document.getElementById("1-btn").onclick = function() {
     scene.remove(group2);
     scene.remove(group3);
+    scene.remove(group4);
     scene.add(group1);
   };
 
   document.getElementById("2-btn").onclick = function() {
     scene.remove(group1);
     scene.remove(group3);
+    scene.remove(group4);
     scene.add(group2);
   };
 
   document.getElementById("3-btn").onclick = function() {
     scene.remove(group1);
     scene.remove(group2);
+    scene.remove(group4);
     scene.add(group3);
   };
 
-
+  document.getElementById("4-btn").onclick = function() {
+    scene.remove(group1);
+    scene.remove(group2);
+    scene.remove(group3);
+    scene.add(group4);
+  };
 
   //======================================
   //dat.GUI
