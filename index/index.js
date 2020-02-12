@@ -21,7 +21,7 @@ function init() {
 
   //　光源を作成
   const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
-  const directionalLight = new THREE.DirectionalLight(0xdfebff, 1.0);
+  const directionalLight = new THREE.DirectionalLight(0xdfebff, 2.0);
   directionalLight.position.set(400, 200, 300);
   scene.add(ambientLight);
   scene.add(directionalLight);
@@ -31,58 +31,91 @@ function init() {
   
 
   // カメラの初期座標を設定
-  camera.position.set(0, 0, 1000);
+  camera.position.set(0, 0, 5);
 
   // カメラコントローラーを作成
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.addEventListener('change', render);
-  controls.minDistance = 800;
-  controls.maxDistance = 1500;
+  controls.minDistance = -5;
+  controls.maxDistance = 5;
   controls.enablePan = false;
 
 
 
-  //======================================
-  //オブジェクトの作成
-  //======================================
+  // //======================================
+  // //オブジェクトの作成
+  // //======================================
+
+  const clipPlanes = [ new THREE.Plane(new THREE.Vector3(1, 0, 0), 0) ];
 
   var group1 = new THREE.Group();
   var group2 = new THREE.Group();
   var group3 = new THREE.Group();
+
+  const loader = new THREE.GLTFLoader();
+  loader.load('./model/stomach/stomach.gltf', function(data){
+    const stomach = data.scene;
+    stomach.material = new THREE.MeshLambertMaterial({
+      side: THREE.DoubleSide,
+      clippingPlanes: clipPlanes,
+      clipIntersection: true
+    });
+    group1.add(stomach);
+  }); 
+
+  //const loader = new THREE.GLTFLoader();
+  loader.load('./model/lung/lung.gltf', function(data){
+    const lung = data.scene;
+    lung.material = new THREE.MeshLambertMaterial({
+      side: THREE.DoubleSide,
+      clippingPlanes: clipPlanes,
+      clipIntersection: true
+    });
+    group2.add(lung);
+  });
+
+  //const loader = new THREE.GLTFLoader();
+  loader.load('./model/intestine/intestine.gltf', function(data){
+    const intestine = data.scene;
+    intestine.material = new THREE.MeshLambertMaterial({
+      side: THREE.DoubleSide,
+      clippingPlanes: clipPlanes,
+      clipIntersection: true
+    });
+    group3.add(intestine);
+  });
+
+  //const Geome1 = new THREE.BoxGeometry(300, 300, 300);
+  // const Geome2 = new THREE.BoxGeometry(2, 5, 2);
+  // const Geome3 = new THREE.TorusGeometry(2, 3, 3, 3);
+
+  // const sphere1 = new THREE.MeshLambertMaterial( {
+  //   color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
+  //   side: THREE.DoubleSide,
+  //   clippingPlanes: clipPlanes,
+  //   clipIntersection: true
+  // });
+
+  // const material2 = new THREE.MeshLambertMaterial( {
+  //   color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
+  //   side: THREE.DoubleSide,
+  //   clippingPlanes: clipPlanes,
+  //   clipIntersection: true
+  // });
+
+  // const material3 = new THREE.MeshLambertMaterial( {
+  //   color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
+  //   side: THREE.DoubleSide,
+  //   clippingPlanes: clipPlanes,
+  //   clipIntersection: true
+  // });
+
+  //group1.add( new THREE.Mesh(Geome2, sphere2) );
+  // group2.add( new THREE.Mesh(Geome2, material2) );
+  // group3.add( new THREE.Mesh(Geome3, material3) );
   
-  const clipPlanes = [ new THREE.Plane(new THREE.Vector3(1, 0, 0), 0) ];
-
-  const Geome1 = new THREE.BoxGeometry(300, 300, 300);
-  const Geome2 = new THREE.BoxGeometry(200, 500, 200);
-  const Geome3 = new THREE.TorusGeometry(200, 80, 64, 80);
-
-  const sphere1 = new THREE.MeshLambertMaterial( {
-    color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
-    side: THREE.DoubleSide,
-    clippingPlanes: clipPlanes,
-    clipIntersection: true
-  });
-
-  const sphere2 = new THREE.MeshLambertMaterial( {
-    color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
-    side: THREE.DoubleSide,
-    clippingPlanes: clipPlanes,
-    clipIntersection: true
-  });
-
-  const sphere3 = new THREE.MeshLambertMaterial( {
-    color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
-    side: THREE.DoubleSide,
-    clippingPlanes: clipPlanes,
-    clipIntersection: true
-  });
-
-  group1.add( new THREE.Mesh(Geome1, sphere1) );
-  group2.add( new THREE.Mesh(Geome2, sphere2) );
-  group3.add( new THREE.Mesh(Geome3, sphere3) );
-  
-  const clipHelpers = new THREE.PlaneHelper(clipPlanes[0], 600, 0xff0000);
-  scene.add(clipHelpers);
+  const clipHelpers = new THREE.PlaneHelper(clipPlanes[0], 5, 0xff0000);
+  scene.add( clipHelpers );
   scene.add( group1 );
 
 
@@ -91,19 +124,19 @@ function init() {
   //オブジェクトの切り替え
   //======================================
 
-  document.getElementById("seihou-btn").onclick = function() {
+  document.getElementById("1-btn").onclick = function() {
     scene.remove(group2);
     scene.remove(group3);
     scene.add(group1);
   };
 
-  document.getElementById("tyouhou-btn").onclick = function() {
+  document.getElementById("2-btn").onclick = function() {
     scene.remove(group1);
     scene.remove(group3);
     scene.add(group2);
   };
 
-  document.getElementById("maru-btn").onclick = function() {
+  document.getElementById("3-btn").onclick = function() {
     scene.remove(group1);
     scene.remove(group2);
     scene.add(group3);
@@ -123,7 +156,7 @@ function init() {
   };
 
 
-  gui.add( params, 'planeConstant', - 300, 300 ).step( 1 ).name( 'plane constant' ).onChange( function ( value ) {
+  gui.add( params, 'planeConstant', - 2, 2 ).step( 0.1 ).name( 'plane constant' ).onChange( function ( value ) {
 
     for ( var j = 0; j < clipPlanes.length; j ++ ) {
 
