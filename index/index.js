@@ -31,12 +31,12 @@ function init() {
   
 
   // カメラの初期座標を設定
-  camera.position.set(5, 0, 0);
+  camera.position.set(0, 0, -5);
 
   // カメラコントローラーを作成
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.minDistance = -5;
-  controls.maxDistance = 5;
+  controls.maxDistance = 10;
   controls.enablePan = false;
 
 
@@ -48,113 +48,55 @@ function init() {
   const clipPlanes = [ new THREE.Plane(new THREE.Vector3(0, 0, 1), 0) ];
 
   var group1 = new THREE.Group();
-  //var group2 = new THREE.Group();
-  // var group3 = new THREE.Group();
-  // var group4 = new THREE.Group();
-
-  //Duck
-  // const loader = new THREE.GLTFLoader();
-  // loader.load('./glTF/Duck.gltf', function(data){
-  //   const Duck = data.scene;
-  //   Duck.mesh = new THREE.Object3D(); 
-  //   Duck.material = new THREE.MeshLambertMaterial({
-  //     side: THREE.DoubleSide,
-  //     clippingPlanes: [clipPlanes],
-  //     clipIntersection: true
-  //   });
-  //   group1.add(Duck);
-  //   console.log(Duck.material)
-  // }); 
-
+  var group2 = new THREE.Group();
+  var group3 = new THREE.Group();
+  var group4 = new THREE.Group();
 
   const loader = new THREE.GLTFLoader();
-  loader.load('./glTF/Duck.gltf', function(data){
-    const Duck = data.scene;
-    Duck.mesh = new THREE.Object3D(); 
-    Duck.material = new THREE.MeshLambertMaterial({
-      side: THREE.DoubleSide,
-      clippingPlanes: [clipPlanes],
-      clipIntersection: true
-    });
-    group1.add(Duck);
-    console.log(Duck.material)
-  }); 
-
 
   //肺
-  // const loader = new THREE.GLTFLoader();
-  // loader.load('./model/lung/lung.gltf', function(data){
-  //   const lung = data.scene;
-  //   lung.material = new THREE.MeshLambertMaterial({
-  //     side: THREE.DoubleSide,
-  //     clippingPlanes: clipPlanes,
-  //     clipIntersection: true
-  //   });
-  //   group1.add(lung);
-  // }); 
+  loader.load('./model/lung/lung.gltf', function(data){
+    const lung = data.scene;
+    lung.children[0].children[0].material.clippingPlanes = clipPlanes;
+    lung.children[0].children[1].material.clippingPlanes = clipPlanes;
+    lung.children[0].children[2].material.clippingPlanes = clipPlanes;
+    lung.children[0].children[0].material.clipIntersection = true;
+    lung.children[0].children[1].material.clipIntersection = true;
+    lung.children[0].children[2].material.clipIntersection = true;
+    group1.add(lung);
+  }); 
 
   //胃
-  // loader.load('./model/stomach/stomach.gltf', function(data){
-  //   const stomach = data.scene;
-  //   stomach.material = new THREE.MeshLambertMaterial({
-  //     side: THREE.DoubleSide,
-  //     clippingPlanes: clipPlanes,
-  //     clipIntersection: true
-  //   });
-  //   group2.add(stomach);
-  // });
+  loader.load('./model/stomach/stomach.gltf', function(data){
+    const stomach = data.scene;
+    stomach.children[0].children[0].material.clippingPlanes = clipPlanes;
+    stomach.children[0].children[1].material.clippingPlanes = clipPlanes;
+    stomach.children[0].children[0].material.clipIntersection = true;
+    stomach.children[0].children[1].material.clipIntersection = true;
+    group2.add(stomach);
+  });
 
   //腸
-  // loader.load('./model/intestine/intestine.gltf', function(data){
-  //   const intestine = data.scene;
-  //   intestine.material = new THREE.MeshLambertMaterial({
-  //     side: THREE.DoubleSide,
-  //     clippingPlanes: clipPlanes,
-  //     clipIntersection: true
-  //   });
-  //   group3.add(intestine);
-  // });
+  loader.load('./model/intestine/intestine.gltf', function(data){
+    const intestine = data.scene;
+    intestine.children[0].children[0].material.clippingPlanes = clipPlanes;
+    intestine.children[0].children[1].material.clippingPlanes = clipPlanes;
+    intestine.children[0].children[0].material.clipIntersection = true;
+    intestine.children[0].children[1].material.clipIntersection = true;
+    group3.add(intestine);
+  });
 
   //肝臓
-  // loader.load('./model/liver/liver.gltf', function(data){
-  //   const liver = data.scene;
-  //   liver.material = new THREE.MeshLambertMaterial({
-  //     side: THREE.DoubleSide,
-  //     clippingPlanes: clipPlanes,
-  //     clipIntersection: true
-  //   });
-  //   group4.add(liver);
-  // });
+  loader.load('./model/liver/liver.gltf', function(data){
+    const liver = data.scene;
+    liver.children[0].children[0].material.clippingPlanes = clipPlanes;
+    liver.children[0].children[1].material.clippingPlanes = clipPlanes;
+    liver.children[0].children[0].material.clipIntersection = true;
+    liver.children[0].children[1].material.clipIntersection = true;
+    group4.add(liver);
+  });
 
-  //const Geome1 = new THREE.BoxGeometry(300, 300, 300);
-  // const Geome2 = new THREE.BoxGeometry(2, 5, 2);
-  // const Geome3 = new THREE.TorusGeometry(2, 3, 3, 3);
-
-  // const sphere1 = new THREE.MeshLambertMaterial( {
-  //   color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
-  //   side: THREE.DoubleSide,
-  //   clippingPlanes: clipPlanes,
-  //   clipIntersection: true
-  // });
-
-  // const material2 = new THREE.MeshLambertMaterial( {
-  //   color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
-  //   side: THREE.DoubleSide,
-  //   clippingPlanes: clipPlanes,
-  //   clipIntersection: true
-  // });
-
-  // const material3 = new THREE.MeshLambertMaterial( {
-  //   color: new THREE.Color().setHSL(Math.random(), 0.5, 0.5),
-  //   side: THREE.DoubleSide,
-  //   clippingPlanes: clipPlanes,
-  //   clipIntersection: true
-  // });
-
-  //group1.add( new THREE.Mesh(Geome2, sphere2) );
-  // group2.add( new THREE.Mesh(Geome2, material2) );
-  // group3.add( new THREE.Mesh(Geome3, material3) );
-  
+ 
   const clipHelpers = new THREE.PlaneHelper(clipPlanes[0], 5, 0xff0000);
   scene.add( clipHelpers );
   scene.add( group1 );
@@ -172,27 +114,29 @@ function init() {
     scene.add(group1);
   };
 
-  // document.getElementById("2-btn").onclick = function() {
-  //   scene.remove(group1);
-  //   scene.remove(group3);
-  //   scene.remove(group4);
-  //   scene.add(group2);
-  // };
+  document.getElementById("2-btn").onclick = function() {
+    scene.remove(group1);
+    scene.remove(group3);
+    scene.remove(group4);
+    scene.add(group2);
+  };
 
-  // document.getElementById("3-btn").onclick = function() {
-  //   scene.remove(group1);
-  //   scene.remove(group2);
-  //   scene.remove(group4);
-  //   scene.add(group3);
-  // };
+  document.getElementById("3-btn").onclick = function() {
+    scene.remove(group1);
+    scene.remove(group2);
+    scene.remove(group4);
+    scene.add(group3);
+  };
 
-  // document.getElementById("4-btn").onclick = function() {
-  //   scene.remove(group1);
-  //   scene.remove(group2);
-  //   scene.remove(group3);
-  //   scene.add(group4);
-  // };
+  document.getElementById("4-btn").onclick = function() {
+    scene.remove(group1);
+    scene.remove(group2);
+    scene.remove(group3);
+    scene.add(group4);
+  };
 
+
+  
   //======================================
   //dat.GUI
   //======================================
@@ -225,6 +169,8 @@ function init() {
 
   } );
 
+
+
   //======================================
   //リサイズ云々
   //======================================
@@ -253,5 +199,4 @@ function init() {
 
   render();
 
-  
 }

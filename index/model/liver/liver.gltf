@@ -94,118 +94,118 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 9313,
+            "count" : 227,
             "max" : [
                 0.8177955746650696,
-                0.35616129636764526,
-                0.2588064968585968
+                0.3548877537250519,
+                0.4457962214946747
             ],
             "min" : [
-                -0.8700301051139832,
-                -0.5962536334991455,
-                -0.3381105363368988
+                -0.8639739155769348,
+                -0.5922173857688904,
+                -0.1494998335838318
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 9313,
+            "count" : 227,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 9313,
+            "count" : 227,
             "type" : "VEC2"
         },
         {
             "bufferView" : 3,
             "componentType" : 5123,
-            "count" : 52224,
+            "count" : 816,
             "type" : "SCALAR"
         },
         {
             "bufferView" : 4,
             "componentType" : 5126,
-            "count" : 9313,
+            "count" : 227,
             "max" : [
-                0.8326774835586548,
-                0.37331950664520264,
-                0.27426669001579285
+                0.8376783728599548,
+                0.37487494945526123,
+                0.4657870829105377
             ],
             "min" : [
-                -0.8817592263221741,
-                -0.6116650700569153,
-                -0.35189732909202576
+                -0.883881151676178,
+                -0.6104796528816223,
+                -0.169498011469841
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 5,
             "componentType" : 5126,
-            "count" : 9313,
+            "count" : 227,
             "type" : "VEC3"
         },
         {
             "bufferView" : 6,
             "componentType" : 5126,
-            "count" : 9313,
+            "count" : 227,
             "type" : "VEC2"
         },
         {
             "bufferView" : 7,
             "componentType" : 5123,
-            "count" : 52224,
+            "count" : 816,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 111756,
+            "byteLength" : 2724,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 111756,
-            "byteOffset" : 111756
+            "byteLength" : 2724,
+            "byteOffset" : 2724
         },
         {
             "buffer" : 0,
-            "byteLength" : 74504,
-            "byteOffset" : 223512
+            "byteLength" : 1816,
+            "byteOffset" : 5448
         },
         {
             "buffer" : 0,
-            "byteLength" : 104448,
-            "byteOffset" : 298016
+            "byteLength" : 1632,
+            "byteOffset" : 7264
         },
         {
             "buffer" : 0,
-            "byteLength" : 111756,
-            "byteOffset" : 402464
+            "byteLength" : 2724,
+            "byteOffset" : 8896
         },
         {
             "buffer" : 0,
-            "byteLength" : 111756,
-            "byteOffset" : 514220
+            "byteLength" : 2724,
+            "byteOffset" : 11620
         },
         {
             "buffer" : 0,
-            "byteLength" : 74504,
-            "byteOffset" : 625976
+            "byteLength" : 1816,
+            "byteOffset" : 14344
         },
         {
             "buffer" : 0,
-            "byteLength" : 104448,
-            "byteOffset" : 700480
+            "byteLength" : 1632,
+            "byteOffset" : 16160
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 804928,
-            "uri" : "kansou.bin"
+            "byteLength" : 17792,
+            "uri" : "kanzou_lo.bin"
         }
     ]
 }
