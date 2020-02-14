@@ -35,7 +35,6 @@ function init() {
 
   // カメラコントローラーを作成
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.addEventListener('change', render);
   controls.minDistance = -5;
   controls.maxDistance = 5;
   controls.enablePan = false;
@@ -54,6 +53,20 @@ function init() {
   // var group4 = new THREE.Group();
 
   //Duck
+  // const loader = new THREE.GLTFLoader();
+  // loader.load('./glTF/Duck.gltf', function(data){
+  //   const Duck = data.scene;
+  //   Duck.mesh = new THREE.Object3D(); 
+  //   Duck.material = new THREE.MeshLambertMaterial({
+  //     side: THREE.DoubleSide,
+  //     clippingPlanes: [clipPlanes],
+  //     clipIntersection: true
+  //   });
+  //   group1.add(Duck);
+  //   console.log(Duck.material)
+  // }); 
+
+
   const loader = new THREE.GLTFLoader();
   loader.load('./glTF/Duck.gltf', function(data){
     const Duck = data.scene;
@@ -233,6 +246,7 @@ function init() {
 	}
 
   function render() {
+    controls.update();
     requestAnimationFrame(render);
     renderer.render(scene, camera);
   }
