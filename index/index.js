@@ -45,8 +45,7 @@ function init() {
   // //オブジェクトの作成
   // //======================================
 
-  const vector = new THREE.Vector3(0, 0, 1);
-  const clipPlanes = [ new THREE.Plane(vector) ];
+  const clipPlanes = [ new THREE.Plane(new THREE.Vector3(0, 0, 1)) ];
 
   var group1 = new THREE.Group();
   var group2 = new THREE.Group();
@@ -146,7 +145,8 @@ function init() {
 
   var params = {
     planeConstant: 0,
-    planeRotation: 0,
+    planeRotationX: 0,
+    planeRotationY: 0,
     showHelpers: false
   };
 
@@ -163,12 +163,33 @@ function init() {
 
   } );
 
-  gui.add( params, 'planeRotation', 0, 2 ).step( 0.1 ).name( 'plane rotation' ).onChange( function ( value ) {
+  gui.add( params, 'planeRotationX', 0, 360 ).step( 1 ).name( 'plane rotationX' ).onChange( function ( value ) {
 
-    var axis = new THREE.Vector3(1,0,0);
-    var angle = value / 180 * Math.PI;
+    if( scene.children[3].id == 12 ){
+      group1.parent.rotation.x = value / 180 * Math.PI;
+    } else  if( scene.children[3].id == 13 ){
+      group2.parent.rotation.x = value / 180 * Math.PI;
+    } else  if( scene.children[3].id == 14 ){
+      group3.parent.rotation.x = value / 180 * Math.PI;
+    } else {
+      group4.parent.rotation.x = value / 180 * Math.PI;
+    }
+  
+    render();
+  
+  } );
 
-    vector.applyAxisAngle ( axis , angle  )
+  gui.add( params, 'planeRotationY', 0, 360 ).step( 10 ).name( 'plane rotationY' ).onChange( function ( value ) {
+
+    if( scene.children[3].id == 12 ){
+      group1.parent.rotation.y = value / 180 * Math.PI;
+    } else  if( scene.children[3].id == 13 ){
+      group2.parent.rotation.y = value / 180 * Math.PI;
+    } else  if( scene.children[3].id == 14 ){
+      group3.parent.rotation.y = value / 180 * Math.PI;
+    } else {
+      group4.parent.rotation.y = value / 180 * Math.PI;
+    }
 
     render();
 
