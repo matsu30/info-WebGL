@@ -45,7 +45,8 @@ function init() {
   // //オブジェクトの作成
   // //======================================
 
-  const clipPlanes = [ new THREE.Plane(new THREE.Vector3(0, 0, 1), 0) ];
+  const vector = new THREE.Vector3(0, 0, 1);
+  const clipPlanes = [ new THREE.Plane(vector) ];
 
   var group1 = new THREE.Group();
   var group2 = new THREE.Group();
@@ -145,6 +146,7 @@ function init() {
 
   var params = {
     planeConstant: 0,
+    planeRotation: 0,
     showHelpers: false
   };
 
@@ -156,6 +158,17 @@ function init() {
       clipPlanes[ j ].constant = value;
 
     }
+
+    render();
+
+  } );
+
+  gui.add( params, 'planeRotation', 0, 2 ).step( 0.1 ).name( 'plane rotation' ).onChange( function ( value ) {
+
+    var axis = new THREE.Vector3(1,0,0);
+    var angle = value / 180 * Math.PI;
+
+    vector.applyAxisAngle ( axis , angle  )
 
     render();
 
