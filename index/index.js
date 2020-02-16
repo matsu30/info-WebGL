@@ -107,11 +107,36 @@ function init() {
   //オブジェクトの切り替え
   //======================================
 
+  function reset1(){
+    clipPlanes[0].constant = 0;
+    group1.parent.rotation.x = 0;
+    group1.parent.rotation.y = 0;
+  }
+
+  function reset2(){
+    clipPlanes[0].constant = 1;
+    group2.parent.rotation.x = 0;
+    group2.parent.rotation.y = 0;
+  }
+
+  function reset3(){
+    clipPlanes[0].constant = 1;
+    group3.parent.rotation.x = 0;
+    group3.parent.rotation.y = 0;
+  }
+
+  function reset4(){
+    clipPlanes[0].constant = 1;
+    group4.parent.rotation.x = 0;
+    group4.parent.rotation.y = 0;
+  }
+
   document.getElementById("1-btn").onclick = function() {
     scene.remove(group2);
     scene.remove(group3);
     scene.remove(group4);
     scene.add(group1);
+    reset1();
   };
 
   document.getElementById("2-btn").onclick = function() {
@@ -119,6 +144,7 @@ function init() {
     scene.remove(group3);
     scene.remove(group4);
     scene.add(group2);
+    reset2();
   };
 
   document.getElementById("3-btn").onclick = function() {
@@ -126,6 +152,7 @@ function init() {
     scene.remove(group2);
     scene.remove(group4);
     scene.add(group3);
+    reset3();
   };
 
   document.getElementById("4-btn").onclick = function() {
@@ -133,6 +160,7 @@ function init() {
     scene.remove(group2);
     scene.remove(group3);
     scene.add(group4);
+    reset4();
   };
 
 
@@ -163,7 +191,7 @@ function init() {
 
   } );
 
-  gui.add( params, 'planeRotationX', 0, 360 ).step( 1 ).name( 'plane rotationX' ).onChange( function ( value ) {
+  gui.add( params, 'planeRotationX', 0, 360 ).step( 10 ).name( 'plane rotationX' ).onChange( function ( value ) {
 
     if( scene.children[3].id == 12 ){
       group1.parent.rotation.x = value / 180 * Math.PI;
