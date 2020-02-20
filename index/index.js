@@ -191,7 +191,7 @@ function init() {
 
   } );
 
-  gui.add( params, 'planeRotationX', 0, 360 ).step( 10 ).name( 'plane rotationX' ).onChange( function ( value ) {
+  gui.add( params, 'planeRotationX', 0, 360 ).step( 5 ).name( 'plane rotationX' ).onChange( function ( value ) {
 
     if( scene.children[3].id == 12 ){
       group1.parent.rotation.x = value / 180 * Math.PI;
@@ -207,7 +207,7 @@ function init() {
   
   } );
 
-  gui.add( params, 'planeRotationY', 0, 360 ).step( 10 ).name( 'plane rotationY' ).onChange( function ( value ) {
+  gui.add( params, 'planeRotationY', 0, 360 ).step( 5 ).name( 'plane rotationY' ).onChange( function ( value ) {
 
     if( scene.children[3].id == 12 ){
       group1.parent.rotation.y = value / 180 * Math.PI;
