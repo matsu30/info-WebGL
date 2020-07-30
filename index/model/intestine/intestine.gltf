@@ -104,118 +104,118 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 10130,
+            "count" : 2797,
             "max" : [
-                6.786190032958984,
-                2.2139108180999756,
-                3.2583794593811035
+                6.887270450592041,
+                2.3386237621307373,
+                3.4039549827575684
             ],
             "min" : [
-                -2.51094126701355,
-                -10.517008781433105,
-                -2.207549571990967
+                -2.6140363216400146,
+                -10.540552139282227,
+                -2.3084356784820557
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 10130,
+            "count" : 2797,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 10130,
+            "count" : 2797,
             "type" : "VEC2"
         },
         {
             "bufferView" : 3,
             "componentType" : 5123,
-            "count" : 25632,
+            "count" : 6408,
             "type" : "SCALAR"
         },
         {
             "bufferView" : 4,
             "componentType" : 5126,
-            "count" : 10343,
+            "count" : 2902,
             "max" : [
-                6.8308234214782715,
-                2.25618052482605,
-                3.3005928993225098
+                6.937259674072266,
+                2.386549949645996,
+                3.4533185958862305
             ],
             "min" : [
-                -2.5551917552948,
-                -10.487387657165527,
-                -2.188368797302246
+                -2.6639859676361084,
+                -10.496153831481934,
+                -2.3084356784820557
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 5,
             "componentType" : 5126,
-            "count" : 10343,
+            "count" : 2902,
             "type" : "VEC3"
         },
         {
             "bufferView" : 6,
             "componentType" : 5126,
-            "count" : 10343,
+            "count" : 2902,
             "type" : "VEC2"
         },
         {
             "bufferView" : 7,
             "componentType" : 5123,
-            "count" : 25440,
+            "count" : 6360,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 121560,
+            "byteLength" : 33564,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 121560,
-            "byteOffset" : 121560
+            "byteLength" : 33564,
+            "byteOffset" : 33564
         },
         {
             "buffer" : 0,
-            "byteLength" : 81040,
-            "byteOffset" : 243120
+            "byteLength" : 22376,
+            "byteOffset" : 67128
         },
         {
             "buffer" : 0,
-            "byteLength" : 51264,
-            "byteOffset" : 324160
+            "byteLength" : 12816,
+            "byteOffset" : 89504
         },
         {
             "buffer" : 0,
-            "byteLength" : 124116,
-            "byteOffset" : 375424
+            "byteLength" : 34824,
+            "byteOffset" : 102320
         },
         {
             "buffer" : 0,
-            "byteLength" : 124116,
-            "byteOffset" : 499540
+            "byteLength" : 34824,
+            "byteOffset" : 137144
         },
         {
             "buffer" : 0,
-            "byteLength" : 82744,
-            "byteOffset" : 623656
+            "byteLength" : 23216,
+            "byteOffset" : 171968
         },
         {
             "buffer" : 0,
-            "byteLength" : 50880,
-            "byteOffset" : 706400
+            "byteLength" : 12720,
+            "byteOffset" : 195184
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 757280,
-            "uri" : "tyou_hi.bin"
+            "byteLength" : 207904,
+            "uri" : "tyou_lo.bin"
         }
     ]
 }

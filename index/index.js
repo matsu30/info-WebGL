@@ -31,7 +31,7 @@ function init() {
   
 
   // カメラの初期座標を設定
-  camera.position.set(0, 0, -3.7);
+  camera.position.set(0, 0, -5);
 
   // カメラコントローラーを作成
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -57,7 +57,6 @@ function init() {
   //肺
   loader.load('./model/lung/lung.gltf', function(data){
     const lung = data.scene;
-    lung.children[0].children[2].material.side = THREE.FrontSide;
     lung.children[0].children[0].material.clippingPlanes = clipPlanes;
     lung.children[0].children[1].material.clippingPlanes = clipPlanes;
     lung.children[0].children[2].material.clippingPlanes = clipPlanes;
@@ -70,7 +69,6 @@ function init() {
   //胃
   loader.load('./model/stomach/stomach.gltf', function(data){
     const stomach = data.scene;
-    stomach.children[0].children[1].material.side = THREE.FrontSide;
     stomach.children[0].children[0].material.clippingPlanes = clipPlanes;
     stomach.children[0].children[1].material.clippingPlanes = clipPlanes;
     stomach.children[0].children[0].material.clipIntersection = true;
@@ -81,7 +79,6 @@ function init() {
   //腸
   loader.load('./model/intestine/intestine.gltf', function(data){
     const intestine = data.scene;
-    intestine.children[0].children[1].material.side = THREE.FrontSide;
     intestine.children[0].children[0].material.clippingPlanes = clipPlanes;
     intestine.children[0].children[1].material.clippingPlanes = clipPlanes;
     intestine.children[0].children[0].material.clipIntersection = true;
@@ -92,7 +89,6 @@ function init() {
   //肝臓
   loader.load('./model/liver/liver.gltf', function(data){
     const liver = data.scene;
-    liver.children[0].children[1].material.side = THREE.FrontSide;
     liver.children[0].children[0].material.clippingPlanes = clipPlanes;
     liver.children[0].children[1].material.clippingPlanes = clipPlanes;
     liver.children[0].children[0].material.clipIntersection = true;
